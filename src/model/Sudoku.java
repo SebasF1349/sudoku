@@ -9,6 +9,14 @@ public class Sudoku {
     board = new int[NODES][NODES];
   }
 
+  public void addBoard(int[][] board) {
+    this.board = board;
+  }
+
+  public int[][] getBoard() {
+    return board;
+  }
+
   public int getNumberNodes() {
     return NODES;
   }

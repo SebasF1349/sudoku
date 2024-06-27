@@ -14,15 +14,35 @@ public class Solver {
   }
 
   public boolean checkRow(int number, int row) {
-    return true;
+    for (int i = 0; i < 9; i++) {
+      if (sudoku.getValue(row, i) == number) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public boolean checkCol(int number, int col) {
-    return true;
+    for (int j = 0; j < 9; j++) {
+      if (sudoku.getValue(j, col) == number) {
+        return true;
+      }
+    }
+    return false;
   }
 
   public boolean checkSquare(int number, int row, int col) {
-    return true;
+    int startRow = (row / 3) * 3;
+    int startCol = (col / 3) * 3;
+
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (sudoku.getValue(startRow + i, startCol + j) == number) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public boolean solve() {
