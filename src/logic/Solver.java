@@ -16,40 +16,40 @@ public class Solver {
   public boolean checkRow(int number, int row) {
     for (int i = 0; i < 9; i++) {
       if (sudoku.getValue(row, i) == number) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   public boolean checkCol(int number, int col) {
     for (int j = 0; j < 9; j++) {
       if (sudoku.getValue(j, col) == number) {
-        return true;
+        return false;
       }
     }
-    return false;
+    return true;
   }
 
   public boolean checkSquare(int number, int row, int col) {
-    int startRow = (row / 3) * 3;
-    int startCol = (col / 3) * 3;
+    int startRow = row - (row % 3);
+    int startCol = col - (col % 3);
 
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         if (sudoku.getValue(startRow + i, startCol + j) == number) {
-          return true;
+          return false;
         }
       }
     }
-    return false;
+    return true;
   }
 
   public boolean solve() {
     for (int row = 0; row < sudoku.getNumberNodes(); row++) {
       for (int col = 0; col < sudoku.getNumberNodes(); col++) {
         if (!sudoku.hasEdge(row, col)) {
-          for (int possibleNumber = 0;
+          for (int possibleNumber = 1;
               possibleNumber <= sudoku.getNumberNodes();
               possibleNumber++) {
             if (numberIsValid(possibleNumber, row, col)) {

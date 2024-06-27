@@ -84,21 +84,21 @@ public class SudokuGUI extends JFrame {
 
         Solver solver = new Solver(sudoku);
 
-        //resolvemos el sudoku y devolvemos un error si no se pudo resolver, sino mostramos el tablero resuelto
-//        if (no se puede resolver) {
-//            JOptionPane.showMessageDialog(this, "El Sudoku no tiene solución", "Error", JOptionPane.ERROR_MESSAGE);
-//        } else {
-//            int[][] solvedBoard = tablero resuelto;
-//            for (int col = 0; col < 9; col++) {
-//                for (int row = 0; row < 9; row++) {
-//                    if (solvedBoard[col][row] != 0) {
-//                        cells[col][row].setText(String.valueOf(solvedBoard[col][row]));
-//                    } else {
-//                        cells[col][row].setText("");
-//                    }
-//                }
-//            }
-//        }
+
+        if (!solver.solve()) {
+            JOptionPane.showMessageDialog(this, "El Sudoku no tiene solución", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int[][] solvedBoard = sudoku.getBoard();
+            for (int col = 0; col < 9; col++) {
+                for (int row = 0; row < 9; row++) {
+                    if (solvedBoard[col][row] != 0) {
+                        cells[col][row].setText(String.valueOf(solvedBoard[col][row]));
+                    } else {
+                        cells[col][row].setText("");
+                    }
+                }
+            }
+        }
     }
 
     private void clearSudoku() {
@@ -111,7 +111,6 @@ public class SudokuGUI extends JFrame {
 
     private void generateSudoku() {
 
-        System.out.println("Generar Sudoku");
     }
 
     public static void main(String[] args) {
