@@ -32,11 +32,11 @@ public class SudokuGUI extends JFrame {
                     for (int n = 0; n < 3; n++) {
                         int row = i * 3 + m;
                         int col = j * 3 + n;
-                        cells[row][col] = new JTextField(1);
-                        cells[row][col].setHorizontalAlignment(JTextField.CENTER);
-                        cells[row][col].setFont(new Font("Arial", Font.BOLD, 20));
-                        ((PlainDocument) cells[row][col].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
-                        subPanel.add(cells[row][col]);
+                        cells[col][row] = new JTextField(1);
+                        cells[col][row].setHorizontalAlignment(JTextField.CENTER);
+                        cells[col][row].setFont(new Font("Arial", Font.BOLD, 20));
+                        ((PlainDocument) cells[col][row].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
+                        subPanel.add(cells[col][row]);
                     }
                 }
                 mainPanel.add(subPanel);
@@ -67,7 +67,7 @@ public class SudokuGUI extends JFrame {
         int[][] board = new int[9][9];
         for (int col = 0; col < 9; col++) {
             for (int row = 0; row < 9; row++) {
-                String text = textFields[row][col].getText().trim();
+                String text = textFields[col][row].getText().trim();
                 if (!text.isEmpty()) {
                     board[col][row] = Integer.parseInt(text);
                 } else {
