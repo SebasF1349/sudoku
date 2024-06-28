@@ -3,7 +3,7 @@ package logic;
 import model.Sudoku;
 
 public class Solver {
-  private final Sudoku sudoku;
+  private Sudoku sudoku;
 
   public Solver(Sudoku sudoku) {
     this.sudoku = sudoku;
@@ -60,9 +60,10 @@ public class Solver {
               sudoku.removeEdge(row, col);
             }
           }
+          return false;
         }
       }
     }
-    return false;
+    return true;
   }
 }
