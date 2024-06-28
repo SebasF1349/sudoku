@@ -49,21 +49,19 @@ public class Solver {
     for (int row = 0; row < sudoku.getNumberNodes(); row++) {
       for (int col = 0; col < sudoku.getNumberNodes(); col++) {
         if (!sudoku.hasEdge(row, col)) {
-          for (int possibleNumber = 1;
-              possibleNumber <= sudoku.getNumberNodes();
-              possibleNumber++) {
+          for (int possibleNumber = 1; possibleNumber <= sudoku.getNumberNodes(); possibleNumber++) {
             if (numberIsValid(possibleNumber, row, col)) {
-              sudoku.addEdge(col, row, possibleNumber);
+              sudoku.addEdge(row, col, possibleNumber);
               if (solve()) {
                 return true;
               }
               sudoku.removeEdge(row, col);
             }
           }
-          return false;
+          return false; // No número válido encontrado, retrocede
         }
       }
     }
-    return true;
+    return true; // Sudoku resuelto
   }
 }

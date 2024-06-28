@@ -1,5 +1,6 @@
 package GUI;
 
+import logic.GenerateSudoku;
 import logic.Solver;
 import model.Sudoku;
 
@@ -63,6 +64,8 @@ public class SudokuGUI extends JFrame {
         setVisible(true);
     }
 
+
+
     private int[][] StringToInteger(JTextField[][] textFields) {
         int[][] board = new int[9][9];
         for (int col = 0; col < 9; col++) {
@@ -79,11 +82,26 @@ public class SudokuGUI extends JFrame {
     }
 
     private void solveSudoku() {
+        boolean isEmpty = true;
+        for (int col = 0; col < 9; col++) {
+            for (int row = 0; row < 9; row++) {
+                if (!cells[col][row].getText().trim().isEmpty()) {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (!isEmpty) break;
+        }
+
+        if (isEmpty) {
+            JOptionPane.showMessageDialog(this, "Necesita ingresar al menos un número", "Tablero vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         Sudoku sudoku = new Sudoku();
         sudoku.addBoard(StringToInteger(cells));
 
         Solver solver = new Solver(sudoku);
-
 
         if (!solver.solve()) {
             JOptionPane.showMessageDialog(this, "El Sudoku no tiene solución", "Error", JOptionPane.ERROR_MESSAGE);
@@ -110,7 +128,19 @@ public class SudokuGUI extends JFrame {
     }
 
     private void generateSudoku() {
+        GenerateSudoku nuevoSudokuGenerator = new GenerateSudoku();
+        Sudoku nuevoSudoku = nuevoSudokuGenerator.getSudoku();
+        int[][] board = nuevoSudoku.getBoard();
 
+        for (int col = 0; col < 9; col++) {
+            for (int row = 0; row < 9; row++) {
+                if (board[col][row] != 0) {
+                    cells[col][row].setText(String.valueOf(board[col][row]));
+                } else {
+                    cells[col][row].setText("");
+                }
+            }
+        }
     }
 
     public static void main(String[] args) {
