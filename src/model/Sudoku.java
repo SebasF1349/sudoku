@@ -16,10 +16,6 @@ public class Sudoku {
         this.board = board;
     }
 
-    public int[][] getBoard() {
-        return board;
-    }
-
     public int getNumberNodes() {
         return NODES;
     }

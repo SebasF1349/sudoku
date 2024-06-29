@@ -110,11 +110,10 @@ public class SudokuGUI extends JFrame {
         if (!solver.solve()) {
             JOptionPane.showMessageDialog(this, "El Sudoku no tiene solución", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            int[][] solvedBoard = sudoku.getBoard();
             for (int row = 0; row < 9; row++) {
                 for (int col = 0; col < 9; col++) {
-                    if (solvedBoard[row][col] != 0) {
-                        cells[row][col].setText(String.valueOf(solvedBoard[row][col]));
+                    if (sudoku.getValue(row, col) != 0) {
+                        cells[row][col].setText(String.valueOf(sudoku.getValue(row, col)));
                     } else {
                         cells[row][col].setText("");
                     }
@@ -135,12 +134,11 @@ public class SudokuGUI extends JFrame {
     private void generateSudoku() {
         GenerateSudoku nuevoSudokuGenerator = new GenerateSudoku();
         Sudoku nuevoSudoku = nuevoSudokuGenerator.getSudoku();
-        int[][] board = nuevoSudoku.getBoard();
 
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (board[row][col] != 0) {
-                    cells[row][col].setText(String.valueOf(board[row][col]));
+                if (nuevoSudoku.getValue(row, col) != 0) {
+                    cells[row][col].setText(String.valueOf(nuevoSudoku.getValue(row, col)));
                     cells[row][col].setEnabled(false);
                 } else {
                     cells[row][col].setText("");
