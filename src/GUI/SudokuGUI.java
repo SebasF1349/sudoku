@@ -100,6 +100,10 @@ public class SudokuGUI extends JFrame {
 
         Sudoku sudoku = new Sudoku();
         sudoku.addBoard(StringToInteger(cells));
+        if (!sudoku.isValid()) {
+            JOptionPane.showMessageDialog(this, "El Sudoku es inválido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Solver solver = new Solver(sudoku);
 
