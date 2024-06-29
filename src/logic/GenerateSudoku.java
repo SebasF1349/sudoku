@@ -1,5 +1,6 @@
 package logic;
 
+import model.Difficulty;
 import model.Sudoku;
 
 import java.util.Random;
@@ -8,10 +9,10 @@ public class GenerateSudoku {
     private final Sudoku sudoku;
     private final Random random = new Random();
 
-    public GenerateSudoku() {
+    public GenerateSudoku(Difficulty difficulty) {
         this.sudoku = new Sudoku();
         generateFullBoard();
-        removeNumbers();
+        removeNumbers(difficulty);
     }
 
     public Sudoku getSudoku() {
@@ -96,8 +97,8 @@ public class GenerateSudoku {
         return solver.numberIsValid(i, j, num);
     }
 
-    private void removeNumbers() {
-        int count = 40; // Number of cells to remove, adjust as needed
+    private void removeNumbers(Difficulty difficulty) {
+        int count = difficulty.getCellsToRemove();
         while (count != 0) {
             int cellId = random.nextInt(81);
             int i = (cellId / 9);

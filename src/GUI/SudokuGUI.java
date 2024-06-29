@@ -2,6 +2,7 @@ package GUI;
 
 import logic.GenerateSudoku;
 import logic.Solver;
+import model.Difficulty;
 import model.Sudoku;
 
 import javax.swing.*;
@@ -123,7 +124,12 @@ public class SudokuGUI extends JFrame {
     }
 
     private void generateSudoku() {
-        GenerateSudoku nuevoSudokuGenerator = new GenerateSudoku();
+        Difficulty[] difficultyOptions = {Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD};
+        int difficulty = JOptionPane.showOptionDialog(this, "Elija la dificultad", "Dificultad", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, difficultyOptions, difficultyOptions[0]);
+        if (difficulty == -1) {
+            return;
+        }
+        GenerateSudoku nuevoSudokuGenerator = new GenerateSudoku(difficultyOptions[difficulty]);
         Sudoku nuevoSudoku = nuevoSudokuGenerator.getSudoku();
 
         for (int row = 0; row < 9; row++) {
