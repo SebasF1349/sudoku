@@ -31,14 +31,14 @@ public class SudokuGUI extends JFrame {
 
                 for (int m = 0; m < 3; m++) {
                     for (int n = 0; n < 3; n++) {
-                        int row = i * 3 + m;
-                        int col = j * 3 + n;
-                        cells[col][row] = new JTextField(1);
-                        cells[col][row].setHorizontalAlignment(JTextField.CENTER);
-                        cells[col][row].setFont(new Font("Arial", Font.BOLD, 20));
-                        cells[col][row].setDisabledTextColor(new Color(100, 100, 100));
-                        ((PlainDocument) cells[col][row].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
-                        subPanel.add(cells[col][row]);
+                        int row = j * 3 + n;
+                        int col = i * 3 + m;
+                        cells[row][col] = new JTextField(1);
+                        cells[row][col].setHorizontalAlignment(JTextField.CENTER);
+                        cells[row][col].setFont(new Font("Arial", Font.BOLD, 20));
+                        cells[row][col].setDisabledTextColor(new Color(100, 100, 100));
+                        ((PlainDocument) cells[row][col].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
+                        subPanel.add(cells[row][col]);
                     }
                 }
                 mainPanel.add(subPanel);
@@ -68,13 +68,13 @@ public class SudokuGUI extends JFrame {
 
     private int[][] StringToInteger(JTextField[][] textFields) {
         int[][] board = new int[9][9];
-        for (int col = 0; col < 9; col++) {
-            for (int row = 0; row < 9; row++) {
-                String text = textFields[col][row].getText().trim();
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                String text = textFields[row][col].getText().trim();
                 if (!text.isEmpty()) {
-                    board[col][row] = Integer.parseInt(text);
+                    board[row][col] = Integer.parseInt(text);
                 } else {
-                    board[col][row] = 0;
+                    board[row][col] = 0;
                 }
             }
         }
@@ -83,9 +83,9 @@ public class SudokuGUI extends JFrame {
 
     private void solveSudoku() {
         boolean isEmpty = true;
-        for (int col = 0; col < 9; col++) {
-            for (int row = 0; row < 9; row++) {
-                if (!cells[col][row].getText().trim().isEmpty()) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (!cells[row][col].getText().trim().isEmpty()) {
                     isEmpty = false;
                     break;
                 }
@@ -111,12 +111,12 @@ public class SudokuGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "El Sudoku no tiene solución", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int[][] solvedBoard = sudoku.getBoard();
-            for (int col = 0; col < 9; col++) {
-                for (int row = 0; row < 9; row++) {
-                    if (solvedBoard[col][row] != 0) {
-                        cells[col][row].setText(String.valueOf(solvedBoard[col][row]));
+            for (int row = 0; row < 9; row++) {
+                for (int col = 0; col < 9; col++) {
+                    if (solvedBoard[row][col] != 0) {
+                        cells[row][col].setText(String.valueOf(solvedBoard[row][col]));
                     } else {
-                        cells[col][row].setText("");
+                        cells[row][col].setText("");
                     }
                 }
             }
@@ -124,10 +124,10 @@ public class SudokuGUI extends JFrame {
     }
 
     private void clearSudoku() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                cells[i][j].setText("");
-                cells[i][j].setEnabled(true);
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                cells[row][col].setText("");
+                cells[row][col].setEnabled(true);
             }
         }
     }
@@ -137,14 +137,14 @@ public class SudokuGUI extends JFrame {
         Sudoku nuevoSudoku = nuevoSudokuGenerator.getSudoku();
         int[][] board = nuevoSudoku.getBoard();
 
-        for (int col = 0; col < 9; col++) {
-            for (int row = 0; row < 9; row++) {
-                if (board[col][row] != 0) {
-                    cells[col][row].setText(String.valueOf(board[col][row]));
-                    cells[col][row].setEnabled(false);
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (board[row][col] != 0) {
+                    cells[row][col].setText(String.valueOf(board[row][col]));
+                    cells[row][col].setEnabled(false);
                 } else {
-                    cells[col][row].setText("");
-                    cells[col][row].setEnabled(true);
+                    cells[row][col].setText("");
+                    cells[row][col].setEnabled(true);
                 }
             }
         }
