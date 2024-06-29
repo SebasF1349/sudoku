@@ -2,6 +2,7 @@ package GUI;
 
 import logic.GenerateSudoku;
 import logic.Solver;
+import logic.SudokuValidator;
 import model.Difficulty;
 import model.Sudoku;
 
@@ -14,7 +15,10 @@ public class SudokuGUI extends JFrame {
     private JTextField[][] cells;
     private JButton solveButton, clearButton, generateButton;
 
+    private SudokuValidator sudokuValidator;
+
     public SudokuGUI() {
+        sudokuValidator = new SudokuValidator();
         setTitle("Sudoku solver");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(450, 500);
@@ -89,17 +93,17 @@ public class SudokuGUI extends JFrame {
         Sudoku sudoku = new Sudoku();
         sudoku.addBoard(StringToInteger(cells));
 
-        if (sudoku.isEmpty()) {
+        if (sudokuValidator.isEmpty(sudoku)) {
             JOptionPane.showMessageDialog(this, "Necesita ingresar al menos un número", "Tablero vacío", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        if (!sudoku.isValid()) {
+        if (!sudokuValidator.isValid(sudoku)) {
             JOptionPane.showMessageDialog(this, "El Sudoku es inválido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (sudoku.isFull()) {
+        if (sudokuValidator.isFull(sudoku)) {
             JOptionPane.showMessageDialog(this, "Sudoku resuelto, ¡felicidades!", "Solución correcta", JOptionPane.INFORMATION_MESSAGE);
             return;
         }

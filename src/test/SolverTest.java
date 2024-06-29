@@ -1,4 +1,5 @@
 import logic.Solver;
+import logic.SudokuValidator;
 import model.Sudoku;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,10 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SolverTest {
     private static Sudoku sudoku;
+    private SudokuValidator sudokuValidator;
 
     @BeforeEach
     void setUp() {
         sudoku = new Sudoku();
+        sudokuValidator = new SudokuValidator();
     }
 
     @Test
@@ -137,5 +140,7 @@ public class SolverTest {
         Solver solver = new Solver(sudoku);
 
         assertTrue(solver.solve());
+        assertTrue(sudokuValidator.isFull(sudoku));
+        assertTrue(sudokuValidator.isValid(sudoku));
     }
 }
