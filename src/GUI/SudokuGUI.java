@@ -37,7 +37,9 @@ public class SudokuGUI extends JFrame {
                         cells[row][col] = new JTextField(1);
                         cells[row][col].setHorizontalAlignment(JTextField.CENTER);
                         cells[row][col].setFont(new Font("Arial", Font.BOLD, 20));
-                        cells[row][col].setDisabledTextColor(new Color(100, 100, 100));
+                        cells[row][col].setForeground(Color.blue);
+                        cells[row][col].setDisabledTextColor(new Color(0, 0, 0));
+                        cells[row][col].setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
                         ((PlainDocument) cells[row][col].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
                         subPanel.add(cells[row][col]);
                     }
