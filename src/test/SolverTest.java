@@ -14,25 +14,25 @@ public class SolverTest {
     }
 
     @Test
-    void testNumberIsValidFail() {
+    void testNumberCanBeAddedFail() {
         sudoku.addEdge(0, 0, 1);
         sudoku.addEdge(1, 1, 2);
         sudoku.addEdge(2, 2, 3);
 
         Solver solver = new Solver(sudoku);
 
-        assertFalse(solver.numberIsValid(0, 1, 2));
+        assertFalse(solver.numberCanBeAdded(0, 1, 2));
     }
 
     @Test
-    void testNumberIsValidSuccess() {
+    void testNumberCanBeAddedSuccess() {
         sudoku.addEdge(0, 0, 1);
         sudoku.addEdge(1, 1, 2);
         sudoku.addEdge(2, 2, 3);
 
         Solver solver = new Solver(sudoku);
 
-        assertTrue(solver.numberIsValid(0, 1, 4));
+        assertTrue(solver.numberCanBeAdded(0, 1, 4));
     }
 
     @Test

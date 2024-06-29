@@ -9,7 +9,7 @@ public class Solver {
         this.sudoku = sudoku;
     }
 
-    public boolean numberIsValid(int row, int col, int number) {
+    public boolean numberCanBeAdded(int row, int col, int number) {
         return checkRow(row, number) && checkCol(col, number) && checkSquare(row, col, number);
     }
 
@@ -50,7 +50,7 @@ public class Solver {
             for (int col = 0; col < sudoku.getNumberNodes(); col++) {
                 if (!sudoku.hasEdge(row, col)) {
                     for (int possibleNumber = 1; possibleNumber <= sudoku.getNumberNodes(); possibleNumber++) {
-                        if (numberIsValid(row, col, possibleNumber)) {
+                        if (numberCanBeAdded(row, col, possibleNumber)) {
                             sudoku.addEdge(row, col, possibleNumber);
                             if (solve()) {
                                 return true;
