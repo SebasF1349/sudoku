@@ -82,24 +82,15 @@ public class SudokuGUI extends JFrame {
     }
 
     private void solveSudoku() {
-        boolean isEmpty = true;
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                if (!cells[row][col].getText().trim().isEmpty()) {
-                    isEmpty = false;
-                    break;
-                }
-            }
-            if (!isEmpty) break;
-        }
 
-        if (isEmpty) {
+        Sudoku sudoku = new Sudoku();
+        sudoku.addBoard(StringToInteger(cells));
+
+        if (sudoku.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Necesita ingresar al menos un número", "Tablero vacío", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        Sudoku sudoku = new Sudoku();
-        sudoku.addBoard(StringToInteger(cells));
         if (!sudoku.isValid()) {
             JOptionPane.showMessageDialog(this, "El Sudoku es inválido", "Error", JOptionPane.ERROR_MESSAGE);
             return;
