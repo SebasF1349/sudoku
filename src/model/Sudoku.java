@@ -47,6 +47,17 @@ public class Sudoku {
         return true;
     }
 
+    public boolean isFull() {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (!hasEdge(row, col)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public boolean isValid() {
         for (int i = 0; i < NODES; i++) {
             Set<Integer> rowValues = new HashSet<>();

@@ -99,6 +99,11 @@ public class SudokuGUI extends JFrame {
             return;
         }
 
+        if (sudoku.isFull()) {
+            JOptionPane.showMessageDialog(this, "Sudoku resuelto, ¡felicidades!", "Solución correcta", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
         Solver solver = new Solver(sudoku);
 
         if (!solver.solve()) {
