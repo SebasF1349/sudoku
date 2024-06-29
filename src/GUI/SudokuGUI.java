@@ -36,7 +36,7 @@ public class SudokuGUI extends JFrame {
                         cells[col][row] = new JTextField(1);
                         cells[col][row].setHorizontalAlignment(JTextField.CENTER);
                         cells[col][row].setFont(new Font("Arial", Font.BOLD, 20));
-                        cells[col][row].setDisabledTextColor(new Color(100,100,100));
+                        cells[col][row].setDisabledTextColor(new Color(100, 100, 100));
                         ((PlainDocument) cells[col][row].getDocument()).setDocumentFilter(new SudokuDocumentFilter());
                         subPanel.add(cells[col][row]);
                     }
@@ -64,7 +64,6 @@ public class SudokuGUI extends JFrame {
         add(contentPanel);
         setVisible(true);
     }
-
 
 
     private int[][] StringToInteger(JTextField[][] textFields) {

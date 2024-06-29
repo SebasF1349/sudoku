@@ -1,6 +1,7 @@
 package logic;
 
 import model.Sudoku;
+
 import java.util.Random;
 
 public class GenerateSudoku {
