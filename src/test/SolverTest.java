@@ -21,7 +21,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertFalse(solver.numberIsValid(2, 0, 1));
+        assertFalse(solver.numberIsValid(0, 1, 2));
     }
 
     @Test
@@ -32,7 +32,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertTrue(solver.numberIsValid(4, 0, 1));
+        assertTrue(solver.numberIsValid(0, 1, 4));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertFalse(solver.checkRow(1, 0));
+        assertFalse(solver.checkRow(0, 1));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertTrue(solver.checkRow(2, 0));
+        assertTrue(solver.checkRow(0, 2));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertFalse(solver.checkCol(1, 0));
+        assertFalse(solver.checkCol(0, 1));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertTrue(solver.checkCol(2, 0));
+        assertTrue(solver.checkCol(0, 2));
     }
 
     @Test
@@ -86,7 +86,7 @@ public class SolverTest {
 
         Solver solver = new Solver(sudoku);
 
-        assertTrue(solver.checkSquare(2, 1, 1));
+        assertTrue(solver.checkSquare(1, 1, 2));
     }
 
     @Test

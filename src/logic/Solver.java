@@ -9,11 +9,11 @@ public class Solver {
         this.sudoku = sudoku;
     }
 
-    public boolean numberIsValid(int number, int row, int col) {
-        return checkRow(number, row) && checkCol(number, col) && checkSquare(number, row, col);
+    public boolean numberIsValid(int row, int col, int number) {
+        return checkRow(row, number) && checkCol(col, number) && checkSquare(row, col, number);
     }
 
-    public boolean checkRow(int number, int row) {
+    public boolean checkRow(int row, int number) {
         for (int i = 0; i < 9; i++) {
             if (sudoku.getValue(row, i) == number) {
                 return false;
@@ -22,7 +22,7 @@ public class Solver {
         return true;
     }
 
-    public boolean checkCol(int number, int col) {
+    public boolean checkCol(int col, int number) {
         for (int j = 0; j < 9; j++) {
             if (sudoku.getValue(j, col) == number) {
                 return false;
@@ -31,7 +31,7 @@ public class Solver {
         return true;
     }
 
-    public boolean checkSquare(int number, int row, int col) {
+    public boolean checkSquare(int row, int col, int number) {
         int startRow = row - (row % 3);
         int startCol = col - (col % 3);
 
@@ -50,7 +50,7 @@ public class Solver {
             for (int col = 0; col < sudoku.getNumberNodes(); col++) {
                 if (!sudoku.hasEdge(row, col)) {
                     for (int possibleNumber = 1; possibleNumber <= sudoku.getNumberNodes(); possibleNumber++) {
-                        if (numberIsValid(possibleNumber, row, col)) {
+                        if (numberIsValid(row, col, possibleNumber)) {
                             sudoku.addEdge(row, col, possibleNumber);
                             if (solve()) {
                                 return true;

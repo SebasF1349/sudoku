@@ -93,7 +93,7 @@ public class GenerateSudoku {
 
     private boolean isSafe(int i, int j, int num) {
         Solver solver = new Solver(sudoku);
-        return solver.numberIsValid(num, i, j);
+        return solver.numberIsValid(i, j, num);
     }
 
     private void removeNumbers() {
